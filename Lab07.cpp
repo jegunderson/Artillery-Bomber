@@ -18,6 +18,7 @@
 #include "position.h"   // for POSITION
 #include "physics.h"    // for PHYSICS
 #include <iostream>
+#include <vector>
 using namespace std;
 
 /*************************************************************************
@@ -185,6 +186,7 @@ int main()
     double ddx = 0;
     // gravity 
     double ddy = 0;
+    
 
     cout << "What is the angle of the howitzer where 0 is up? ";
     cin >> angleDeg;
@@ -194,33 +196,52 @@ int main()
     dy = cos(angleRad) * physics.INIT_SPEED;
 
 
-
     
 
+    vector<double> yGrav = { 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000 };
+    vector<double> fGrav= { -9.807, -9.804, -9.801, -9.797, -9.794, -9.791, -9.788, -9.785, -9.782, -9.779, -9.776, -9.761, -9.745, -9.730 };
 
+
+    //int vecSize = yGrav.size();
 
     while (y >= 0)
     {
-        // Gravity Interpolation
-        ddy = -9.807 + ((dy - 0) * (-9.730 - -9.807)) / (25000 - 0);
+        //{
+        //    // Gravity Interpolation
+        //    int i = 0;
+
+        //    if (y >= yGrav[vecSize - 2])
+        //    {
+        //        i = vecSize - 2;  // use second to last value because we need one larger for interpolation
+        //    }
+
+        //    else
+        //    {
+        //        while (y > yGrav[i + 1]) i++;
+        //    }
+        //    double yL = yGrav[i];
+        //    double fL = fGrav[i];
+        //    double yR = yGrav[i + 1];
+        //    double fR = fGrav[i + 1];
+
+        //    double dfdy = (fR - fL) / (yR - yL);
+        //
+        //    ddy = fL + dfdy * (y - yL);
+        ddy = physics.interpolate(yGrav, fGrav, y);
+
+        cout << y << "\n";
+        //cout << ddy << "\n";
         // adjust velocity for acceleration
         dx += ddx * time;
         dy += ddy * time;
         // adjust postion for acceleration and velocity
         y = y + dy * time + (.5 * ddy * time * time);
         x = x + dx * time + (.5 * ddx * time * time);
-       /* cout << dy << "\n";*/
+        /* cout << dy << "\n";*/
         hangtime += time;
-    }
-    cout << y << "\n";
-    cout << x << "\n";
+    };
+    cout << "Elevation: " << y << "\n";
+    cout << "Distance " << x << "\n";
     cout << hangtime;
 
-
-
-
-
-    
-
-    //cout << y;
 }

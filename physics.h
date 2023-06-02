@@ -9,14 +9,15 @@
 #pragma once
 
 #include <cmath>
+#include <vector>
 #include <iostream>
 using namespace std;
 
 
-class Physics 
+class Physics
 {
 
-public: 
+public:
 	double INIT_SPEED = 827;
 	double WEIGHT = 46.7;
 	double DIAMETER = .15489;
@@ -28,6 +29,8 @@ public:
 	double dy;
 	double x = 0;
 	double y = 0;
+
+	double interpolate(vector<double> xData, vector<double> yData, double x);
 
 
 
