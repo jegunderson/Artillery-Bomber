@@ -1,6 +1,6 @@
 /*************************************************************
  * 1. Name:
- *      Spencer Sorenson
+ *      Spencer Sorenson, Jacob Gunderson
  * 2. Assignment Name:
  *      Lab 08: M777 Howitzer
  * 3. Assignment Description:
