@@ -181,11 +181,26 @@ int main()
     double hangtime = 0;
     // horizontal and vertical distance
     double x = 0;
-    double y = 0;
+    double y = 1;
     // horizontal and vertical components of acceleration
     double ddx = 0;
     // gravity 
     double ddy = 0;
+    // drag
+    double drag = 0;
+    // velocity
+    double velocity = 0;
+    // current angle
+    double angle_from_components = 0;
+    // air density
+    double air_density = 0;
+    // current speed of sound
+    double mach_curr = 0;
+    // current drag coefficient
+    double coefficient = 0;
+    double last_y = 0;
+    double last_x = 0;
+    double last_time = 0;
     
 
     cout << "What is the angle of the howitzer where 0 is up? ";
@@ -201,10 +216,22 @@ int main()
     vector<double> yGrav = { 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000 };
     vector<double> fGrav= { -9.807, -9.804, -9.801, -9.797, -9.794, -9.791, -9.788, -9.785, -9.782, -9.779, -9.776, -9.761, -9.745, -9.730 };
 
+    vector<double> altitude = { 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000, 30000, 40000, 50000, 60000, 70000, 80000 };
+    vector<double> density = { 1.2250000, 1.1120000, 1.0070000, 0.9093000, 0.8194000, 0.7364000, 0.6601000, 0.5900000, 0.5258000, 0.4671000, 0.4135000, 0.1948000, 0.0889100, 0.0400800, 0.0184100, 0.0039960, 0.0010270, 0.0003097, 0.0000828, 0.0000185 };
+    
+    vector<double> mach = { 0.300, 0.500, 0.700, 0.890, 0.920, 0.960, 0.980, 1.000, 1.020, 1.060, 1.240, 1.530, 1.990, 2.870, 2.890, 5.000 };
+    vector<double> drag_coefficient = { 0.1629, 0.1659, 0.2031, 0.2597, 0.3010, 0.3287, 0.4002, 0.4258, 0.4335, 0.4483, 0.4064, 0.3663, 0.2897, 0.2297, 0.2306, 0.2656 };
+    
+    vector<double> speed_of_sound = { 340, 336, 332, 328, 324, 320, 316, 312, 308, 303, 299, 295, 295, 295, 305, 324 }; \
+
+    //vector<double> last_y_value = { y, last_y};
+    //vector<double> x_value = { x, last_x };
+    //vector<double> time_value = { time, last_time };
+
 
     //int vecSize = yGrav.size();
 
-    while (y >= 0)
+    while (y >= 1)
     {
         //{
         //    // Gravity Interpolation
@@ -227,7 +254,18 @@ int main()
         //    double dfdy = (fR - fL) / (yR - yL);
         //
         //    ddy = fL + dfdy * (y - yL);
-        ddy = physics.interpolate(yGrav, fGrav, y);
+        //ddy = physics.interpolate(yGrav, fGrav, y);
+
+        //drag calculation
+        velocity = sqrt((dx * dx) + (dy * dy));
+        angle_from_components = atan2(dx, dy);
+        air_density = physics.interpolate(altitude, density, y);
+        mach_curr = physics.interpolate(altitude, speed_of_sound, y);
+        coefficient = physics.interpolate(mach, drag_coefficient, velocity / mach_curr);
+        drag = (0.5 * coefficient * air_density * (velocity * velocity) * physics.AREA) / physics.WEIGHT;
+
+        ddx = -sin(angle_from_components) * drag;
+        ddy = physics.interpolate(yGrav, fGrav, y) - cos(angle_from_components) * drag;
 
         cout << y << "\n";
         //cout << ddy << "\n";
@@ -235,11 +273,22 @@ int main()
         dx += ddx * time;
         dy += ddy * time;
         // adjust postion for acceleration and velocity
+        last_y = y;
+        last_x = x;
+        last_time = hangtime;
         y = y + dy * time + (.5 * ddy * time * time);
         x = x + dx * time + (.5 * ddx * time * time);
         /* cout << dy << "\n";*/
         hangtime += time;
     };
+
+
+    vector<double> last_y_value = { y, last_y };
+    vector<double> x_value = { x, last_x };
+    vector<double> time_value = { hangtime, last_time };
+    x = physics.interpolate(last_y_value, x_value, 0);
+    time = physics.interpolate(last_y_value, time_value, 0);
+
     cout << "Elevation: " << y << "\n";
     cout << "Distance " << x << "\n";
     cout << hangtime;
