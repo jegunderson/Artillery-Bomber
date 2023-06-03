@@ -1,14 +1,14 @@
 /*************************************************************
  * 1. Name:
- *      The Key
+ *      Spencer Sorenson
  * 2. Assignment Name:
  *      Lab 08: M777 Howitzer
  * 3. Assignment Description:
  *      Simulate firing the M777 howitzer 15mm artillery piece
  * 4. What was the hardest part? Be as specific as possible.
- *      ??
+ *      Interpolation and drag
  * 5. How long did it take for you to complete the assignment?
- *      ??
+ *      5 hours
  *****************************************************************/
 
 #include <cassert>      // for ASSERT
@@ -268,7 +268,7 @@ int main()
         ddx = -sin(angle_from_components) * drag;
         ddy = physics.interpolate(yGrav, fGrav, y) - cos(angle_from_components) * drag;
 
-        cout << y << "\n";
+        //cout << y << "\n";
         //cout << ddy << "\n";
         // adjust velocity for acceleration
         dx += ddx * time;
@@ -293,6 +293,6 @@ int main()
     cout << fixed;
     cout << setprecision(1);
     cout << "Distance " << x << "\n";
-    cout << hangtime;
+    cout << "Hang Time: " << hangtime;
 
 }
