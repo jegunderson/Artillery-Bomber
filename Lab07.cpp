@@ -18,6 +18,7 @@
 #include "position.h"   // for POSITION
 #include "physics.h"    // for PHYSICS
 #include <iostream>
+#include <iomanip>
 #include <vector>
 using namespace std;
 
@@ -181,7 +182,7 @@ int main()
     double hangtime = 0;
     // horizontal and vertical distance
     double x = 0;
-    double y = 1;
+    double y = 0;
     // horizontal and vertical components of acceleration
     double ddx = 0;
     // gravity 
@@ -231,7 +232,7 @@ int main()
 
     //int vecSize = yGrav.size();
 
-    while (y >= 1)
+    while (y >= 0)
     {
         //{
         //    // Gravity Interpolation
@@ -287,9 +288,10 @@ int main()
     vector<double> x_value = { x, last_x };
     vector<double> time_value = { hangtime, last_time };
     x = physics.interpolate(last_y_value, x_value, 0);
-    time = physics.interpolate(last_y_value, time_value, 0);
+    hangtime = physics.interpolate(last_y_value, time_value, 0);
 
-    cout << "Elevation: " << y << "\n";
+    cout << fixed;
+    cout << setprecision(1);
     cout << "Distance " << x << "\n";
     cout << hangtime;
 
