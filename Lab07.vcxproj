@@ -153,6 +153,7 @@
     <ClInclude Include="position.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testGround.h" />
+    <ClInclude Include="testPhysics.h" />
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="uiDraw.h" />
     <ClInclude Include="uiInteract.h" />

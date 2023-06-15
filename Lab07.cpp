@@ -17,6 +17,7 @@
 #include "ground.h"     // for GROUND
 #include "position.h"   // for POSITION
 #include "physics.h"    // for PHYSICS
+#include "testPhysics.h" // ONLY FOR TESTING 
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -170,7 +171,12 @@ double Position::metersFromPixels = 40.0;
 //}
 int main()
 {
+    TestPhysics test;
     Physics physics;
+    /*
+    * Only for testing
+    */
+    test.run();
 
     double angleDeg;
     double angleRad;
@@ -293,6 +299,8 @@ int main()
     cout << fixed;
     cout << setprecision(1);
     cout << "Distance " << x << "\n";
-    cout << "Hang Time: " << hangtime;
+    cout << "Hang Time: " << hangtime << "\n";
 
+    double grav3 = physics.interpolate(mach, drag_coefficient, 5);
+    cout << grav3;
 }
