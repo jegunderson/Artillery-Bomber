@@ -19,17 +19,15 @@ class Howitzer
 {
 
 public:
-
+	double age;
 	double getAngle();
 	Position getPosition();
 	void adjustAngle(Interface& ui);
 	void fire(Interface & ui);
 	void drawHowitzer(ogstream & gout);
-
-private:
 	double angle;
 	Position position;
-	double age;
 	Ground ground;
+	
 
 };

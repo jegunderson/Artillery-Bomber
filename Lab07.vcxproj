@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="howitzer.cpp" />
     <ClCompile Include="physics.cpp" />
     <ClCompile Include="ground.cpp" />
     <ClCompile Include="Lab07.cpp" />
@@ -148,11 +149,13 @@
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="howitzer.h" />
     <ClInclude Include="physics.h" />
     <ClInclude Include="ground.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testGround.h" />
+    <ClInclude Include="testHowitzer.h" />
     <ClInclude Include="testPhysics.h" />
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="uiDraw.h" />
