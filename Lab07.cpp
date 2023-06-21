@@ -176,7 +176,7 @@ int main()
     /*
     * Only for testing
     */
-    test.run();
+    test.main();
 
     double angleDeg;
     double angleRad;

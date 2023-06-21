@@ -21,6 +21,12 @@ using namespace std;
 class TestPhysics
 {
 public:
+
+    void main()
+    {
+        run();
+        cout << "All physics tests pass" << endl;
+    }
     void run()
     {
         // Test Interpolate Drag
@@ -142,8 +148,8 @@ private:
         // Exercise
         double y = p.interGrav(x);
         // Verify
-        assert(y > -9.776);
-        assert(y < -9.761);
+        assert(y > -9.804);
+        assert(y < -9.801);
         // Teardown
     };
 
