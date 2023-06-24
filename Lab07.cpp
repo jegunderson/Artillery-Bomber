@@ -18,6 +18,8 @@
 #include "position.h"   // for POSITION
 #include "physics.h"    // for PHYSICS
 #include "testPhysics.h" // ONLY FOR TESTING 
+#include "testHowitzer.h"
+#include "howitzer.h"
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -171,12 +173,15 @@ double Position::metersFromPixels = 40.0;
 //}
 int main()
 {
+    TestHowitzer hTest;
+    Howitzer howitzer;
     TestPhysics test;
     Physics physics;
     /*
     * Only for testing
     */
     test.main();
+    hTest.main();
 
     double angleDeg;
     double angleRad;

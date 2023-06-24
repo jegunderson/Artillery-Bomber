@@ -22,12 +22,13 @@ public:
 	double age;
 	double getAngle();
 	Position getPosition();
-	void adjustAngle(Interface& ui);
-	void fire(Interface & ui);
+	void adjustAngle(const Interface *ui);
+	void fire(const Interface *ui);
 	void drawHowitzer(ogstream & gout);
 	double angle;
 	Position position;
 	Ground ground;
-	
 
+private:
+	Interface ui;
 };

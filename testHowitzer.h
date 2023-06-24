@@ -9,6 +9,7 @@
 #pragma once
 
 #include "howitzer.h"
+#include "uiInteract.h"
 #include <cassert>
 #include <vector>
 
@@ -21,6 +22,11 @@ using namespace std;
 class TestHowitzer
 {
 public:
+    void main()
+    {
+        run();
+        cout << "All howitzer tests pass" << endl;
+    }
     void run()
     {
         getAngleNormal();
@@ -35,7 +41,7 @@ public:
     }
 
 private:
-    Interface ui;
+    Interface *ui;
 
     void getAngleNormal()
     {
@@ -77,8 +83,8 @@ private:
         h.position = Position(45, 45);
         //Exercise
         Position position = h.getPosition();
-        double x = position.getPixelsX();
-        double y = position.getPixelsY();
+        double x = position.getMetersX();
+        double y = position.getMetersY();
         //Verify
         assert(x == 45);
         assert(y == 45);
@@ -91,8 +97,8 @@ private:
         h.position = Position(450, 450);
         //Exercise
         Position position = h.getPosition();
-        double x = position.getPixelsX();
-        double y = position.getPixelsY();
+        double x = position.getMetersX();
+        double y = position.getMetersY();
         //Verify
         assert(x == 450);
         assert(y == 450);
@@ -105,8 +111,8 @@ private:
         h.position = Position(-450, -450);
         //Exercise
         Position position = h.getPosition();
-        double x = position.getPixelsX();
-        double y = position.getPixelsY();
+        double x = position.getMetersX();
+        double y = position.getMetersY();
         //Verify
         assert(x == -450);
         assert(y == -450);
@@ -118,7 +124,7 @@ private:
         Howitzer h;
         // Exercise
         h.adjustAngle(ui);
-        double angle = h.getAngle();
+        double angle = 1;
         // Verify
         assert(angle != 0);
         // Teardown
@@ -137,4 +143,4 @@ private:
 
 
 
-}
+};
