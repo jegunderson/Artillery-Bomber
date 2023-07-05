@@ -21,7 +21,7 @@ class Howitzer
 public:
 	double age;
 	double getAngle();
-	Position getPosition();
+	Position getPosition() const;
 	void adjustAngle(const Interface *ui);
 	void fire(const Interface *ui);
 	void drawHowitzer(ogstream & gout);

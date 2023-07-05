@@ -144,6 +144,7 @@
     <ClCompile Include="ground.cpp" />
     <ClCompile Include="Lab07.cpp" />
     <ClCompile Include="position.cpp" />
+    <ClCompile Include="projectile.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="physics.h" />
     <ClInclude Include="ground.h" />
     <ClInclude Include="position.h" />
+    <ClInclude Include="projectile.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testGround.h" />
     <ClInclude Include="testHowitzer.h" />
