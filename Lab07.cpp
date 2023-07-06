@@ -118,17 +118,19 @@ void callBack(const Interface* pUI, void* p)
            pDemo->projectilePath[i].setPixelsX(pos.getPixelsX() - 10);
            pDemo->projectilePath[i].setPixelsY(pos.getPixelsY() - 10);
        }
+       Position target = pDemo->ground.getTarget();
+       if (computeDistance(pos, target) <= 200)
+       {
+           pDemo->ground.reset(pDemo->howitzer.position);
+       }
        if (pDemo->ground.getElevationMeters(pos) <= pos.getMetersY())
-           pDemo->howitzer.age += 0.5;
+            pDemo->howitzer.age += 0.5;
        else
            pDemo->howitzer.age = -1;
    }
 
    // Hit target
- /*  if (computeDistance(pDemo->projectile->getPosition(), pDemo->ground.getTarget()) == 0)
-   {
-       pDemo->ground.reset(pDemo->howitzer.position);
-   }*/
+
    
   
 
