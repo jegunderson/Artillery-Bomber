@@ -66,6 +66,7 @@ public:
    Projectile* projectile = NULL;
    double angle;                  // angle of the howitzer 
    double time;                   // amount of time since the last firing
+   int counter;
 };
 
 /*************************************
@@ -101,28 +102,35 @@ void callBack(const Interface* pUI, void* p)
    }
    else if (pDemo->howitzer.age > 0)
    {
+    /*   while (pDemo->counter < 20)
+       {
+           pDemo->projectile = new Projectile(pDemo->howitzer.position, pDemo->howitzer.getAngle());
+           Position pos = pDemo
+           pDemo->projectilePath[pDemo->counter].setPixelsX;
+       }*/
+       // move the projectile across the screen
        pDemo->projectile->update();
        Position pos = pDemo->projectile->getPosition();
+
+       // tail of 20 pixels
+       for (int i = 0; i < 20; i++)
+       {
+           pDemo->projectilePath[i].setPixelsX(pos.getPixelsX() - 10);
+           pDemo->projectilePath[i].setPixelsY(pos.getPixelsY() - 10);
+       }
        if (pDemo->ground.getElevationMeters(pos) <= pos.getMetersY())
            pDemo->howitzer.age += 0.5;
        else
            pDemo->howitzer.age = -1;
    }
 
-
-   // move the projectile across the screen
-
-
+   // Hit target
+ /*  if (computeDistance(pDemo->projectile->getPosition(), pDemo->ground.getTarget()) == 0)
+   {
+       pDemo->ground.reset(pDemo->howitzer.position);
+   }*/
    
-   //for (int i = 0; i < 20; i++)
-   //{
-   //   // this bullet is moving left at 1 pixel per frame
-   //   double x = pDemo->projectilePath[i].getPixelsX();
-   //   x -= 1.0;
-   //   if (x < 0)
-   //      x = pDemo->ptUpperRight.getPixelsX();
-   //   pDemo->projectilePath[i].setPixelsX(x);
-   //}
+  
 
 
    //
@@ -139,15 +147,28 @@ void callBack(const Interface* pUI, void* p)
 
    // draw the projectile
    //for (int i = 0; i < 20; i++)
-      //gout.drawProjectile(pDemo->projectilePath[i], 0.5 * (double)i);
+   //   gout.drawProjectile(pDemo->projectilePath[i], 0.5 * (double)i);
    if (pDemo->howitzer.age >= 0)
+   {
        pDemo->projectile->drawProjectile(gout);
+       gout << "Altitude: " 
+           << pDemo->projectile->getPosition().getMetersY() << "m \n";
+       gout << "Speed: "
+           << pDemo->projectile->getVelocity() << "m/s \n";
+       gout << "Distance: "
+           << pDemo->projectile->getPosition().getMetersX() - pDemo->howitzer.getPosition().getMetersX() << "m \n";
+       gout << "Hangtime: "
+           << pDemo->howitzer.age << "s\n";
+   }
 
    // draw some text on the screen
    gout.setf(ios::fixed | ios::showpoint);
    gout.precision(1);
-   gout << "Time since the bullet was fired: "
-        << pDemo->time << "s\n";
+   gout << "Angle: "
+       << pDemo->howitzer.degrees << "degrees \n";
+ 
+
+   pDemo->counter += 1;
 }
 
 double Position::metersFromPixels = 40.0;

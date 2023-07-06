@@ -22,10 +22,10 @@ Position Projectile::getPosition()
 	return position;
 }
 
-void Projectile::calcVelocity()
+double Projectile::getVelocity()
 {
     
-	return;
+	return velocity;
 }
 
 void Projectile::calcAngle()

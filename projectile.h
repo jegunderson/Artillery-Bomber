@@ -22,7 +22,7 @@ class Projectile
 public:
 	Projectile(Position& ptHowitzer, double angle);
 	Position getPosition();
-	void calcVelocity();
+	double getVelocity();
 	void calcAngle();
 	void calcAirDensity();
 	void calcDrag();

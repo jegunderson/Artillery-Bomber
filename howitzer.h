@@ -27,6 +27,7 @@ public:
 	void fire(const Interface *ui);
 	void drawHowitzer(ogstream & gout);
 	double angle;
+	double degrees;
 	Position position;
 	Ground ground;
 	bool ready;

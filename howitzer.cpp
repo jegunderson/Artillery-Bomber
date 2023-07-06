@@ -4,6 +4,7 @@
 Howitzer::Howitzer()
 {
 	angle = 0;
+	degrees = 0;
 	age = -1;
 	ready = true;
 }
@@ -47,6 +48,7 @@ void Howitzer::adjustAngle(const Interface *ui)
 		angle += (angle >= 0 ? -0.003 : 0.003);
 	if (ui->isDown())
 		angle += (angle >= 0 ? 0.003 : -0.003);
+	degrees = angle * 180 / 3.14;
 	
 	return;
 }
