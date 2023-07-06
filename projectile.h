@@ -28,10 +28,12 @@ public:
 	void calcDrag();
 	void setPosition(Position &newPosition);
 	void drawProjectile(ogstream& gout);
+	void update();
 	Ground ground;
 
 private:
 	Position position;
+	bool isFlying();
 	double age;
 	double dx;
 	double dy;
@@ -40,4 +42,11 @@ private:
 	double air_density;
 	double gravity;
 	double drag;
+	double radians;
+	double x;
+	double y;
+	double ddx;
+	double ddy;
+	double time;
+	double hangtime;
 };

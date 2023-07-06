@@ -19,6 +19,7 @@ class Howitzer
 {
 
 public:
+	Howitzer();
 	double age;
 	double getAngle();
 	Position getPosition() const;
@@ -28,6 +29,7 @@ public:
 	double angle;
 	Position position;
 	Ground ground;
+	bool ready;
 
 private:
 	Interface ui;

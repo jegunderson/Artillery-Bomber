@@ -37,11 +37,11 @@ public:
 		return interpolate(mach, dragCo, x);
 	};
 
-	double interAirD(double x) 
+	double interAirD(double y) 
 	{
 		vector<double> altitude = { 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000, 30000, 40000, 50000, 60000, 70000, 80000 };
 		vector<double> density = { 1.2250000, 1.1120000, 1.0070000, 0.9093000, 0.8194000, 0.7364000, 0.6601000, 0.5900000, 0.5258000, 0.4671000, 0.4135000, 0.1948000, 0.0889100, 0.0400800, 0.0184100, 0.0039960, 0.0010270, 0.0003097, 0.0000828, 0.0000185 };
-		return interpolate(altitude, density, x);
+		return interpolate(altitude, density, y);
 	};
 	double interSpeedS(double x) 
 	{

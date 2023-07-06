@@ -20,6 +20,7 @@
 #include "testPhysics.h" // ONLY FOR TESTING 
 #include "testHowitzer.h"
 #include "howitzer.h"
+#include "projectile.h"
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -62,6 +63,7 @@ public:
    Position  ptHowitzer;          // location of the howitzer
    Position  ptUpperRight;        // size of the screen
    Howitzer howitzer;
+   Projectile* projectile = NULL;
    double angle;                  // angle of the howitzer 
    double time;                   // amount of time since the last firing
 };
@@ -92,18 +94,36 @@ void callBack(const Interface* pUI, void* p)
    //
 
    // advance time by half a second.
-   pDemo->howitzer.age += 0.5;
+   if (pDemo->howitzer.age == 0)
+   {
+       pDemo->projectile = new Projectile(pDemo->howitzer.position, pDemo->howitzer.getAngle());
+       pDemo->howitzer.age += 0.5;
+   }
+   else if (pDemo->howitzer.age > 0)
+   {
+       pDemo->projectile->update();
+       Position pos = pDemo->projectile->getPosition();
+       if (pDemo->ground.getElevationMeters(pos) <= pos.getMetersY())
+           pDemo->howitzer.age += 0.5;
+       else
+           pDemo->howitzer.age = -1;
+   }
+
 
    // move the projectile across the screen
-   for (int i = 0; i < 20; i++)
-   {
-      // this bullet is moving left at 1 pixel per frame
-      double x = pDemo->projectilePath[i].getPixelsX();
-      x -= 1.0;
-      if (x < 0)
-         x = pDemo->ptUpperRight.getPixelsX();
-      pDemo->projectilePath[i].setPixelsX(x);
-   }
+
+
+   
+   //for (int i = 0; i < 20; i++)
+   //{
+   //   // this bullet is moving left at 1 pixel per frame
+   //   double x = pDemo->projectilePath[i].getPixelsX();
+   //   x -= 1.0;
+   //   if (x < 0)
+   //      x = pDemo->ptUpperRight.getPixelsX();
+   //   pDemo->projectilePath[i].setPixelsX(x);
+   //}
+
 
    //
    // draw everything
@@ -118,8 +138,10 @@ void callBack(const Interface* pUI, void* p)
    gout.drawHowitzer(pDemo->howitzer.getPosition(), pDemo->howitzer.getAngle(), pDemo->howitzer.age);
 
    // draw the projectile
-   for (int i = 0; i < 20; i++)
-      gout.drawProjectile(pDemo->projectilePath[i], 0.5 * (double)i);
+   //for (int i = 0; i < 20; i++)
+      //gout.drawProjectile(pDemo->projectilePath[i], 0.5 * (double)i);
+   if (pDemo->howitzer.age >= 0)
+       pDemo->projectile->drawProjectile(gout);
 
    // draw some text on the screen
    gout.setf(ios::fixed | ios::showpoint);

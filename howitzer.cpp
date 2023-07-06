@@ -1,5 +1,12 @@
 #include "howitzer.h"
+#include "projectile.h"
 
+Howitzer::Howitzer()
+{
+	angle = 0;
+	age = -1;
+	ready = true;
+}
 
 double Howitzer::getAngle()
 {
@@ -46,9 +53,19 @@ void Howitzer::adjustAngle(const Interface *ui)
 
 void Howitzer::fire(const Interface *ui)
 {
-	if (ui->isSpace())
-		age = 0;
+	if (age == -1)
+	{
+		if (ui->isSpace())
+
+		{
+
+			age = 0;
+
+		}
+	}
+		
 		//create instance of projectile once class is created.
+
 	return;
 }
 
