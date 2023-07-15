@@ -15,12 +15,16 @@
 using namespace std;
 
 
+/***********************************************************
+ * Howitzer
+ * The howitzer class
+ ***********************************************************/
+
 class Howitzer
 {
 
 public:
 	Howitzer();
-	double age;
 	double getAngle();
 	Position getPosition() const;
 	void adjustAngle(const Interface *ui);
@@ -31,6 +35,7 @@ public:
 	Position position;
 	Ground ground;
 	bool ready;
+	double age;
 
 private:
 	Interface ui;

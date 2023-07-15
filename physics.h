@@ -13,6 +13,10 @@
 #include <iostream>
 using namespace std;
 
+/***********************************************************
+ * PHYSICS
+ * The physics class
+ ***********************************************************/
 
 class Physics
 {

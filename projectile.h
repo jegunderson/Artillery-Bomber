@@ -15,6 +15,10 @@
 #include "uiDraw.h"
 using namespace std;
 
+/***********************************************************
+ * Projectile
+ * The projectile class
+ ***********************************************************/
 
 class Projectile
 {
@@ -33,7 +37,6 @@ public:
 
 private:
 	Position position;
-	bool isFlying();
 	double age;
 	double dx;
 	double dy;

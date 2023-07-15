@@ -3,6 +3,7 @@
 
 Howitzer::Howitzer()
 {
+	// initialize variables
 	angle = 0;
 	degrees = 0;
 	age = -1;
@@ -21,23 +22,7 @@ Position Howitzer::getPosition() const
 
 void Howitzer::adjustAngle(const Interface *ui)
 {
-	//if (ui->isLeft())
-	//	if (angle <= -1.5708)
-	//		angle -= .05;
-	//else if (ui->isRight())
-	//	if (angle >= 1.5708)
-	//		angle += .05;
-	//else if (ui->isUp())
-	//	if (angle < 0)
-	//		angle += .003;
-	//else if (angle > 0)
-	//	angle -= .003;
-	//else if (ui->isDown())
-	//	if (angle < 0)
-	//		angle -= .003;
-	//else if (angle > 0)
-	//	angle += .003;
-
+	// move by a lot
 	if (ui->isRight())
 		 angle += 0.05;
 	if (ui->isLeft())
@@ -55,18 +40,10 @@ void Howitzer::adjustAngle(const Interface *ui)
 
 void Howitzer::fire(const Interface *ui)
 {
+	// set age to 0 so main can initialize a projectile, but only if there aren't other projectiles
 	if (age == -1)
-	{
 		if (ui->isSpace())
-
-		{
-
 			age = 0;
-
-		}
-	}
-		
-		//create instance of projectile once class is created.
 
 	return;
 }
